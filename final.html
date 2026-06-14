@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat Exchange Dashboard</title>
+    <link rel="stylesheet" href="f.css">
+    <script src="Notification.js" defer></script>
+    <script src="master.js" defer></script>
+</head>
+<body>
+
+      <!-- ===== Navbar ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__brand">
+      <img src="logo.png" alt="RailConnect Logo" />
+      <span>RailConnect</span>
+    </div>
+
+    <button class="navbar__toggle" id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+    <div class="navbar__links" id="nav-links">
+      <a href="home.html">Home</a>
+      <a href="home.html#services">Services</a>
+      <a href="error.html">Support</a>
+      <a href="login.html">Logout</a>
+      <a href="#" class="nav-icon" title="Account">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </a>
+      <div class="nav-notif-wrapper">
+        <button class="nav-icon nav-notif-btn" id="notif-btn" title="Notifications" onclick="toggleNotifications()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span class="notif-dot"></span>
+        </button>
+        <div class="notif-panel" id="notif-panel">
+          <div class="notif-panel__header">Notifications</div>
+          <div class="notif-panel__list">
+            <div class="notif-item notif-item--unread" id="sereq">
+              <div class="notif-item__icon">🔄</div>
+              <div class="notif-item__content">
+                <div class="notif-item__text">A person has requested to you for <br><strong>seat exchange</strong>.<br>
+                  <br>
+                  Train: <strong>KOAA ADI EXP (19414)</strong><br>
+                  Date: <strong>15 Jan 2026</strong><br>
+                  Your Seat: <strong id="ntcurseat"></strong><br>
+                  Exchange with: <strong id="ntchangeto"></strong><br>
+                 <br>
+                 <strong>Reason for exchange:</strong><br>
+                  <div class="notif-item__text" id="ntreason"></div>
+                   <div class="button">
+                    <button class="btn-acc" onclick="accepted()">ACCEPT</button>
+                    <button class="btn-dec" onclick="rejected()">DECLINE</button>
+                    </div>
+                
+                </div>
+                <div class="notif-item__time">Just now</div>
+              </div>
+            </div>
+             <div class="notif-item notif-item--unread" id="seacc">
+              <div class="notif-item__icon">🔄</div>
+              <div class="notif-item__content">
+                <div class="notif-item__text"><strong style="color:var(--green);font-size:1.2em;">You seat has been changed.</strong><br>
+                  <br>
+                  Train: <strong>KOAA ADI EXP (19414)</strong><br>
+                  Date: <strong>15 Jan 2026</strong><br>
+                  Your Current Seat: <strong id="ntcurseat2"></strong><br>
+                </div>
+                <div class="notif-item__time">Just now</div>
+              </div>
+            </div>
+             <div class="notif-item notif-item--unread" id="sedec">
+              <div class="notif-item__icon">🔄</div>
+              <div class="notif-item__content">
+                <div class="notif-item__text"><strong style="color:var(--red);font-size:1.2em;">You declined to change the seat.</strong><br>
+                  <br>
+                  Train: <strong>KOAA ADI EXP (19414)</strong><br>
+                  Date: <strong>15 Jan 2026</strong><br>
+                  Your Seat: <strong id="ntcurseat3"></strong><br>
+                </div>
+                <div class="notif-item__time">Just now</div>
+              </div>
+            </div>
+              <div class="notif-item notif-item--unread" id="seacc2">
+              <div class="notif-item__icon">🔄</div>
+              <div class="notif-item__content">
+                <div class="notif-item__text"><strong style="color:var(--green);font-size:1.2em;">You requst to change the seat was accepted.</strong><br>
+                  <br>
+                  Train: <strong>KOAA ADI EXP (19414)</strong><br>
+                  Date: <strong>15 Jan 2026</strong><br>
+                  Your Seat: <strong id="ntcurseat4"></strong><br>
+                </div>
+                <div class="notif-item__time">Just now</div>
+              </div>
+            </div>
+            <div class="notif-item notif-item--unread" id="sedec2">
+              <div class="notif-item__icon">🔄</div>
+              <div class="notif-item__content">
+                <div class="notif-item__text"><strong style="color:var(--red);font-size:1.2em;">You request to change the seat was declined.</strong><br>
+                  <br>
+                  Train: <strong>KOAA ADI EXP (19414)</strong><br>
+                  Date: <strong>15 Jan 2026</strong><br>
+                  Your Seat: <strong id="ntcurseat5"></strong><br>
+                </div>
+                <div class="notif-item__time">Just now</div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+    <div class="layout">
+        <div class="main-content">
+            <div class="page-header">
+                <h1>Seat Exchange</h1>
+                <p>Request a seat exchange for a better journey experience.</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-item active" id="step-node-1"><div class="step-number">1</div><div class="step-label">Select Seat</div></div>
+                <div class="step-item" id="step-node-2"><div class="step-number">2</div><div class="step-label">Confirmation</div></div>
+                <div class="step-item" id="step-node-3"><div class="step-number">3</div><div class="step-label">Reason</div></div>
+                <div class="step-item" id="step-node-4"><div class="step-number">4</div><div class="step-label">Submit Request</div></div>
+            </div>
+
+            <div class="big-box"> 
+                <div class="train-header">
+                    <div class="train-info">
+                        <h2>19414 • Koaa Adi Exp</h2>                  
+                        <p>Ujjain (UJN) &rarr; Chhayapuri(CYI)</p>
+                    </div>
+                    <div class="pnr-info">
+                        <p><strong>PNR:</strong></p><p id="lppnr"></p>
+                        <p><strong>Class:</strong> AC 3 Tier (3A)</p>
+                    </div>
+                </div>
+                
+                <div class="box">
+                    <p>Coach B1 • AC 3 Tier (3A) <span style="font-size: 12px; color: #64748b; font-weight: normal; margin-left: 6px;">(Horizontal Scroll for all 72 seats)</span></p>
+                    <div class="all-coaches" id="dynamic-seat-grid-target"> 
+                        </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="side-boxes">
+            <div class="box1">
+                <h1>Your booking</h1>
+                <div class="booking-field"><p class="label">Name</p><p class="value" id="lpname"></p></div>
+                <div class="booking-field"><p class="label">PNR</p><p class="value" id="lppnr2"></p></div>
+                <div class="booking-field"><p class="label">Train</p><p class="value">Koaa Adi Exp</p></div>
+                <div class="booking-field"><p class="label">From</p><p class="value">Ujjain (UJN)</p></div>
+                <div class="booking-field"><p class="label">To</p><p class="value"></p>Chhayapuri (CYI)</div>
+                <div class="booking-field"><p class="label">Your Current Seat</p><p class="value" id="lpcurrseat" style="color: #2563eb;"></p></div>
+
+                
+            </div>
+            <div class="box2">
+                <p>Select a seat to continue</p>
+                <span>Click on any available seat from the layout to request an exchange.</span>
+            </div>
+            <div class="box3">
+                <p>Please choose responsibly.</p>
+                <span>False requests may lead to penalty.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="exchangeModal">
+        <div class="modal-window">
+            <button class="modal-close" id="closeModalCross">×</button>
+            
+            <div id="modal-form-view-state">
+                <div class="modal-header">
+                    <div class="modal-header-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+                    </div>
+                    <div class="modal-title">
+                        <h2>Confirm Seat Exchange Request</h2>
+                        <p>Please review the details before sending your request.</p>
+                    </div>
+                </div>
+
+                <p class="section-title">Exchange Summary</p>
+                <div class="exchange-summary-grid">
+                    <div class="seat-card-block">
+                        <div class="seat-card-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 19H5V5h14v14z"></path><path d="M5 10h14"></path></svg>
+                        </div>
+                        <div class="seat-card-meta">
+                            <p class="meta-label">Your Current Seat</p>
+                            <p class="meta-value" id="lpcurrseat2"></p>
+                        </div>
+                    </div>
+                    <div class="exchange-arrow-center">➔</div>
+                    <div class="seat-card-block">
+                        <div class="seat-card-icon" style="color: #16a34a;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 19H5V5h14v14z"></path><path d="M5 10h14"></path></svg>
+                        </div>
+                        <div class="seat-card-meta">
+                            <p class="meta-label" style="color: #16a34a;">Requested Seat</p>
+                            <p class="meta-value" id="lpchangeto">--</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split-form-row">
+                    <div>
+                        <p class="section-title" style="margin-bottom: 12px;">Why This Seat?</p>
+                        <div class="checklist-item"><span class="icon-check">✓</span> Window Seat</div>
+                        <div class="checklist-item"><span class="icon-check">✓</span> Better Travel Experience</div>
+                        <div class="checklist-item"><span class="icon-check">✓</span> Long Journey Comfort</div>
+                    </div>
+                    <div class="input-group">
+                        <label>Reason for Exchange <span>*</span></label>
+                        <textarea id="lpreason" placeholder="I would prefer a window seat for a long overnight journey."></textarea>
+                        <div class="char-counter">43 / 250</div>
+                    </div>
+                </div>
+
+                <div class="notice-container">
+                    <div class="notice-title">⚠ Important Notice</div>
+                    <ul class="notice-list">
+                        <li>Your request will be sent to the passenger currently assigned to this seat.</li>
+                        <li>The exchange will only happen if they approve.</li>
+                    </ul>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-submit-request" id="submitBtn" onclick="requestSent()">Send Request</button>
+                    <button class="btn-cancel-request" id="cancelBtn">Cancel</button>
+                </div>
+            </div>
+
+            <div class="modal-success-state" id="modal-success-view-state">
+                <div class="success-badge-circle">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                
+                <div class="success-title">
+                    <h3>Request Submitted!</h3>
+                    <p>Your seat exchange request has been sent<br>successfully.</p>
+                </div>
+
+                <div class="receipt-table-box">
+                    <div class="receipt-row">
+                        <span class="receipt-label">Request ID</span>
+                        <span class="receipt-value" id="lpreqid" style="color: #2563eb;">EX-2026-12451</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="receipt-label">Requested Seat</span>
+                        <span class="receipt-value" id="lpchangeto2"></span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="receipt-label">Current Seat</span>
+                        <span class="receipt-value" id="lpcurrseat3"></span>
+                    </div>
+                    <div class="receipt-row" style="border: none;">
+                        <span class="receipt-label">Status</span>
+                        <span class="status-pill-pending">🕒 Pending Approval</span>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-submit-request" id="viewRequestsBtn" style="margin-bottom: 4px;">View Requests</button>
+                    <button class="btn-secondary-action" id="returnDashboardBtn">Return to Dashboard</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="rail-footer">
+        <div class="footer-container">
+            <div class="footer-col"><h3>RailConnect</h3><ul><li><a href="#">About Us</a></li> <li><a href="#">Contact</a></li> <li><a href="#">Careers</a></li> </ul></div>
+            <div class="footer-col"><h3>Quick Links</h3><ul><li><a href="#">Train Schedule</a></li> <li><a href="#">Fare Enquiry</a></li> <li><a href="#">Station Info</a></li> </ul></div>
+            <div class="footer-col"><h3>Legal</h3><ul><li><a href="#">Privacy Policy</a></li> <li><a href="#">Terms of Use</a></li> <li><a href="#">Refund Policy</a></li> </ul></div>
+            <div class="footer-col"><h3>Help</h3><ul><li><a href="#">Customer Support</a></li> <li><a href="#">FAQs</a></li> <li><a href="#">Feedback</a></li> </ul></div>
+        </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2026 RailConnect — Indian Railways. All rights reserved.</span>
+                <span>
+          <a href="error.html">Privacy</a> &middot;
+          <a href="error.html">Terms</a> &middot;
+          <a href="error.html">Cookies</a>
+        </span>
+            </div>
+    
+
+
+    </footer>
+
+    <script>
+        // 1. DYNAMICALLY GENERATING 72 SEATS TOTAL INSIDE THE BLOCKED COACH VIEW
+        const seatGridTarget = document.getElementById('dynamic-seat-grid-target');
+        const itemsPerCompartment = 8;
+        const totalSeatsNeeded = 72;
+        const totalCompartments = totalSeatsNeeded / itemsPerCompartment; 
+        
+        let seatCounter = 1;
+        for (let i = 0; i < totalCompartments; i++) {
+            const containerDiv = document.createElement('div');
+            containerDiv.className = 'container';
+            
+            const coachDiv = document.createElement('div');
+            coachDiv.className = 'coach';
+            
+            // Build out standard rows with middle space gaps
+            for (let j = 0; j < itemsPerCompartment; j++) {
+                if (j === 2) { 
+                    const spaceDiv = document.createElement('div');
+                    spaceDiv.className = 'space';
+                    coachDiv.appendChild(spaceDiv);
+                }
+                const seatDiv = document.createElement('div');
+                seatDiv.className = 'seat';
+                seatDiv.textContent = seatCounter;
+                coachDiv.appendChild(seatDiv);
+                seatCounter++;
+            }
+            containerDiv.appendChild(coachDiv);
+            seatGridTarget.appendChild(containerDiv);
+        }
+
+        // 2. MODAL INTERACTION CONTROLLERS
+        const modal = document.getElementById('exchangeModal');
+        const formState = document.getElementById('modal-form-view-state');
+        const successState = document.getElementById('modal-success-view-state');
+        
+        const closeCross = document.getElementById('closeModalCross');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const returnDashboardBtn = document.getElementById('returnDashboardBtn');
+        const viewRequestsBtn = document.getElementById('viewRequestsBtn');
+
+        // Dynamic element text markers
+        const targetModalSeatLbl = document.getElementById('lpchangeto');
+        const receiptRequestedSeatLbl = document.getElementById('lpchangeto2');
+
+        // Steps indicator nodes
+        const step2 = document.getElementById('step-node-2');
+        const step3 = document.getElementById('step-node-3');
+        const step4 = document.getElementById('step-node-4');
+
+        // Toggle visibility triggers when seat is selected
+        document.querySelectorAll(".seat").forEach(seat => {
+            seat.addEventListener("click", () => {
+                // Clear any previous selections for clarity
+                document.querySelectorAll(".seat").forEach(s => s.classList.remove("selected"));
+                
+                seat.classList.add("selected");
+                const chosenNumber = seat.textContent;
+                // Update text configurations dynamically
+                targetModalSeatLbl.textContent = `B1 • Seat ${chosenNumber}`;
+                receiptRequestedSeatLbl.textContent = `B1 • Seat ${chosenNumber}`;
+
+                // Advance Progress bar styling highlights
+                step2.classList.add('active');
+                step3.classList.add('active');
+
+                // Reset views and display modal form state stage 1
+                formState.style.display = 'block';
+                successState.style.display = 'none';
+                modal.classList.add('show');
+            });
+        });
+
+       
+
+        
+        function hideModal() {
+            modal.classList.remove('show');
+            document.querySelectorAll(".seat").forEach(s => s.classList.remove("selected"));
+            step2.classList.remove('active');
+            step3.classList.remove('active');
+            step4.classList.remove('active');
+        }
+
+        closeCross.addEventListener('click', hideModal);
+        cancelBtn.addEventListener('click', hideModal);
+        returnDashboardBtn.addEventListener('click', hideModal);
+        viewRequestsBtn.addEventListener('click', hideModal);
+
+        // Transition logic from Stage 1 (Form) to Stage 2 (Success Screen)
+        submitBtn.addEventListener('click', () => {
+            formState.style.display = 'none';
+            successState.style.display = 'block';
+            step4.classList.add('active'); // Complete progress track bar highlight
+        });
+
+        // 3. DYNAMIC SYSTEM LIVE CLOCK TRACKER
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            hours = hours < 10 ? '0' + hours : hours;
+            
+            document.getElementById('live-time').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            document.getElementById('live-date').textContent = `${days[now.getDay()]} , ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+
+         function toggleNotifications() {
+      document.getElementById('notif-panel').classList.toggle('open');
+    }
+
+    // Close notification panel when clicking outside
+    document.addEventListener('click', function (e) {
+      const wrapper = document.querySelector('.nav-notif-wrapper');
+      if (wrapper && !wrapper.contains(e.target)) {
+        document.getElementById('notif-panel').classList.remove('open');
+      }
+    });
+    </script>
+</body>
+</html>
