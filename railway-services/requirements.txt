@@ -1,0 +1,4 @@
+Flask>=2.0
+
+# Optional: used to build the executable
+pyinstaller>=5.0

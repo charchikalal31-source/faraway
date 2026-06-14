@@ -1,0 +1,386 @@
+('C:\\Users\\vedan\\Downloads\\railway-services '
+ '(2)\\railway-services\\dist\\gg.exe',
+ True,
+ False,
+ False,
+ 'C:\\Users\\vedan\\Downloads\\railway-services '
+ '(2)\\railway-services\\.venv\\Lib\\site-packages\\PyInstaller\\bootloader\\images\\icon-console.ico',
+ None,
+ False,
+ False,
+ b'<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n<assembly xmlns='
+ b'"urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">\n  <trustInfo x'
+ b'mlns="urn:schemas-microsoft-com:asm.v3">\n    <security>\n      <requested'
+ b'Privileges>\n        <requestedExecutionLevel level="asInvoker" uiAccess='
+ b'"false"/>\n      </requestedPrivileges>\n    </security>\n  </trustInfo>\n  '
+ b'<compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">\n    <'
+ b'application>\n      <supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f'
+ b'0}"/>\n      <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}"/>\n '
+ b'     <supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}"/>\n      <s'
+ b'upportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}"/>\n      <supporte'
+ b'dOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}"/>\n    </application>\n  <'
+ b'/compatibility>\n  <application xmlns="urn:schemas-microsoft-com:asm.v3">'
+ b'\n    <windowsSettings>\n      <longPathAware xmlns="http://schemas.micros'
+ b'oft.com/SMI/2016/WindowsSettings">true</longPathAware>\n    </windowsSett'
+ b'ings>\n  </application>\n  <dependency>\n    <dependentAssembly>\n      <ass'
+ b'emblyIdentity type="win32" name="Microsoft.Windows.Common-Controls" version='
+ b'"6.0.0.0" processorArchitecture="*" publicKeyToken="6595b64144ccf1df" langua'
+ b'ge="*"/>\n    </dependentAssembly>\n  </dependency>\n</assembly>',
+ True,
+ False,
+ None,
+ None,
+ None,
+ 'C:\\Users\\vedan\\Downloads\\railway-services '
+ '(2)\\railway-services\\build\\gg\\gg.pkg',
+ [('pyi-contents-directory _internal', '', 'OPTION'),
+  ('PYZ-00.pyz',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\build\\gg\\PYZ-00.pyz',
+   'PYZ'),
+  ('struct',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\build\\gg\\localpycs\\struct.pyc',
+   'PYMODULE'),
+  ('pyimod01_archive',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\build\\gg\\localpycs\\pyimod01_archive.pyc',
+   'PYMODULE'),
+  ('pyimod02_importers',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\build\\gg\\localpycs\\pyimod02_importers.pyc',
+   'PYMODULE'),
+  ('pyimod03_ctypes',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\build\\gg\\localpycs\\pyimod03_ctypes.pyc',
+   'PYMODULE'),
+  ('pyimod04_pywin32',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\build\\gg\\localpycs\\pyimod04_pywin32.pyc',
+   'PYMODULE'),
+  ('pyiboot01_bootstrap',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
+   'PYSOURCE'),
+  ('pyi_rth_inspect',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_inspect.py',
+   'PYSOURCE'),
+  ('pyi_rth_multiprocessing',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_multiprocessing.py',
+   'PYSOURCE'),
+  ('pyi_rth_pkgutil',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_pkgutil.py',
+   'PYSOURCE'),
+  ('pyi_rth_setuptools',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\PyInstaller\\hooks\\rthooks\\pyi_rth_setuptools.py',
+   'PYSOURCE'),
+  ('gg',
+   'C:\\Users\\vedan\\Downloads\\railway-services (2)\\railway-services\\gg.py',
+   'PYSOURCE'),
+  ('python314.dll',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\python314.dll',
+   'BINARY'),
+  ('_zstd.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_zstd.pyd',
+   'EXTENSION'),
+  ('_lzma.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_lzma.pyd',
+   'EXTENSION'),
+  ('_bz2.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_bz2.pyd',
+   'EXTENSION'),
+  ('_decimal.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_decimal.pyd',
+   'EXTENSION'),
+  ('_hashlib.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_hashlib.pyd',
+   'EXTENSION'),
+  ('select.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\select.pyd',
+   'EXTENSION'),
+  ('_socket.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_socket.pyd',
+   'EXTENSION'),
+  ('unicodedata.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\unicodedata.pyd',
+   'EXTENSION'),
+  ('_ssl.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_ssl.pyd',
+   'EXTENSION'),
+  ('_overlapped.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_overlapped.pyd',
+   'EXTENSION'),
+  ('_asyncio.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_asyncio.pyd',
+   'EXTENSION'),
+  ('_queue.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_queue.pyd',
+   'EXTENSION'),
+  ('_ctypes.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_ctypes.pyd',
+   'EXTENSION'),
+  ('_multiprocessing.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_multiprocessing.pyd',
+   'EXTENSION'),
+  ('pyexpat.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\pyexpat.pyd',
+   'EXTENSION'),
+  ('_wmi.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_wmi.pyd',
+   'EXTENSION'),
+  ('_uuid.pyd',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\_uuid.pyd',
+   'EXTENSION'),
+  ('markupsafe\\_speedups.cp314-win_amd64.pyd',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\markupsafe\\_speedups.cp314-win_amd64.pyd',
+   'EXTENSION'),
+  ('VCRUNTIME140.dll',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\VCRUNTIME140.dll',
+   'BINARY'),
+  ('libcrypto-3-x64.dll',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\libcrypto-3-x64.dll',
+   'BINARY'),
+  ('libssl-3-x64.dll',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\libssl-3-x64.dll',
+   'BINARY'),
+  ('libffi-8.dll',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\DLLs\\libffi-8.dll',
+   'BINARY'),
+  ('VCRUNTIME140_1.dll',
+   'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\VCRUNTIME140_1.dll',
+   'BINARY'),
+  ('Data\\Bookings.csv',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\Data\\Bookings.csv',
+   'DATA'),
+  ('Data\\ExchangeRequests.csv',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\Data\\ExchangeRequests.csv',
+   'DATA'),
+  ('Data\\User.csv',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\Data\\User.csv',
+   'DATA'),
+  ('HTML\\Notification.js',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\Notification.js',
+   'DATA'),
+  ('HTML\\Redirect.png',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\Redirect.png',
+   'DATA'),
+  ('HTML\\bg.png',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\bg.png',
+   'DATA'),
+  ('HTML\\booking.html',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\booking.html',
+   'DATA'),
+  ('HTML\\error.html',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\error.html',
+   'DATA'),
+  ('HTML\\f.css',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\f.css',
+   'DATA'),
+  ('HTML\\final.html',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\final.html',
+   'DATA'),
+  ('HTML\\home.html',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\home.html',
+   'DATA'),
+  ('HTML\\login.html',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\login.html',
+   'DATA'),
+  ('HTML\\logo.png',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\logo.png',
+   'DATA'),
+  ('HTML\\logo1.png',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\logo1.png',
+   'DATA'),
+  ('HTML\\master.js',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\master.js',
+   'DATA'),
+  ('HTML\\mybookings.html',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\mybookings.html',
+   'DATA'),
+  ('HTML\\railconnect.css',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\railconnect.css',
+   'DATA'),
+  ('HTML\\seat list.html',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\HTML\\seat list.html',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\INSTALLER',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\INSTALLER',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\licenses\\LICENSE',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\licenses\\LICENSE',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\WHEEL',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\WHEEL',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\METADATA',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\METADATA',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\REQUESTED',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\REQUESTED',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\RECORD',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\RECORD',
+   'DATA'),
+  ('setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\top_level.txt',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\importlib_metadata-8.7.1.dist-info\\top_level.txt',
+   'DATA'),
+  ('setuptools\\_vendor\\jaraco\\text\\Lorem ipsum.txt',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\setuptools\\_vendor\\jaraco\\text\\Lorem '
+   'ipsum.txt',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\RECORD',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\RECORD',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\WHEEL',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\WHEEL',
+   'DATA'),
+  ('click-8.4.1.dist-info\\licenses\\LICENSE.txt',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\click-8.4.1.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\licenses\\LICENSE.txt',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\INSTALLER',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\INSTALLER',
+   'DATA'),
+  ('click-8.4.1.dist-info\\INSTALLER',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\click-8.4.1.dist-info\\INSTALLER',
+   'DATA'),
+  ('click-8.4.1.dist-info\\WHEEL',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\click-8.4.1.dist-info\\WHEEL',
+   'DATA'),
+  ('click-8.4.1.dist-info\\RECORD',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\click-8.4.1.dist-info\\RECORD',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\METADATA',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\METADATA',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\METADATA',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\METADATA',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\METADATA',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\METADATA',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\WHEEL',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\WHEEL',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\WHEEL',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\WHEEL',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\licenses\\LICENSE.txt',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\REQUESTED',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\REQUESTED',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\LICENSE.txt',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\LICENSE.txt',
+   'DATA'),
+  ('click-8.4.1.dist-info\\METADATA',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\click-8.4.1.dist-info\\METADATA',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\RECORD',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\RECORD',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\INSTALLER',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\INSTALLER',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\licenses\\LICENSE.txt',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\licenses\\LICENSE.txt',
+   'DATA'),
+  ('werkzeug-3.1.8.dist-info\\RECORD',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\werkzeug-3.1.8.dist-info\\RECORD',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\INSTALLER',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\INSTALLER',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\RECORD',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\RECORD',
+   'DATA'),
+  ('markupsafe-3.0.3.dist-info\\top_level.txt',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\markupsafe-3.0.3.dist-info\\top_level.txt',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\METADATA',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\METADATA',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\entry_points.txt',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\entry_points.txt',
+   'DATA'),
+  ('flask-3.1.3.dist-info\\INSTALLER',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\flask-3.1.3.dist-info\\INSTALLER',
+   'DATA'),
+  ('itsdangerous-2.2.0.dist-info\\WHEEL',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\itsdangerous-2.2.0.dist-info\\WHEEL',
+   'DATA'),
+  ('base_library.zip',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\build\\gg\\base_library.zip',
+   'DATA')],
+ [],
+ False,
+ False,
+ 1781436627,
+ [('run.exe',
+   'C:\\Users\\vedan\\Downloads\\railway-services '
+   '(2)\\railway-services\\.venv\\Lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run.exe',
+   'EXECUTABLE')],
+ 'C:\\Users\\vedan\\AppData\\Roaming\\uv\\python\\cpython-3.14.6-windows-x86_64-none\\python314.dll')

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Search and book train tickets — RailConnect Indian Railways" />
+  <title>Book Ticket — RailConnect</title>
+  <link rel="stylesheet" href="RailConnect.css" />
+  <link rel="icon" href="logo1.png" />
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__brand">
+      <img src="logo1.png" alt="RailConnect logo1" />
+      <span>RailConnect</span>
+    </div>
+
+    <!-- Live Clock -->
+    <div class="navbar__clock" id="live-clock">
+      <span class="navbar__clock-time" id="clock-time">--:--:-- --</span>
+      <span class="navbar__clock-date" id="clock-date">--- --, ----</span>
+    </div>
+
+    <button class="navbar__toggle" id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+    <div class="navbar__links" id="nav-links">
+      <a href="home.html">Home</a>
+      <a href="home.html#services">Services</a>
+      <a href="error.html">Support</a>
+      <a href="login.html">logo1ut</a>
+      <a href="#" class="nav-icon" title="Account">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </a>
+      <div class="nav-notif-wrapper">
+        <button class="nav-icon nav-notif-btn" id="notif-btn" title="Notifications" onclick="toggleNotifications()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span class="notif-dot"></span>
+        </button>
+        <div class="notif-panel" id="notif-panel">
+          <div class="notif-panel__header">Notifications</div>
+          <div class="notif-panel__list">
+            <div class="notif-item notif-item--unread">
+              <div class="notif-item__icon">🎫</div>
+              <div class="notif-item__content">
+                <div class="notif-item__text">Your ticket for <strong>KOAA ADI EXP (19414)</strong> has been confirmed.</div>
+                <div class="notif-item__time">2 hours ago</div>
+              </div>
+            </div>
+            <div class="notif-item notif-item--unread">
+              <div class="notif-item__icon">🔄</div>
+              <div class="notif-item__content">
+                <div class="notif-item__text">Seat Exchange service is now <strong>live!</strong> Try it today.</div>
+                <div class="notif-item__time">1 day ago</div>
+              </div>
+            </div>
+            <div class="notif-item">
+              <div class="notif-item__icon">💰</div>
+              <div class="notif-item__content">
+                <div class="notif-item__text">Refund of <strong>₹ 245.00</strong> has been processed to your account.</div>
+                <div class="notif-item__time">3 days ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== Back Button ===== -->
+  <a href="javascript:history.back()" class="back-btn" id="back-btn" title="Go back">
+    &#8592;
+  </a>
+
+  <!-- ===== Main ===== -->
+  <main class="main main--booking">
+
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="page-header__icon">🎫</div>
+      <h1 class="page-header__title">Book Your Train Ticket</h1>
+      <p class="page-header__sub">Enter your journey details below to search for available trains.</p>
+    </div>
+
+    <!-- Booking Form Card -->
+    <div class="booking-card">
+      <form class="booking-form" id="booking-form" onsubmit="return false;">
+
+        <!-- From & To with Swap -->
+        <div class="form-row" style="align-items: flex-end;">
+          <div class="form-group">
+            <label for="from-station">From</label>
+            <input type="text" id="from-station" name="from" placeholder="e.g. New Delhi - NDLS" required />
+          </div>
+
+          <button type="button" class="swap-btn" id="swap-btn" title="Swap stations">⇄</button>
+
+          <div class="form-group">
+            <label for="to-station">To</label>
+            <input type="text" id="to-station" name="to" placeholder="e.g. Mumbai Central - MMCT" required />
+          </div>
+        </div>
+
+        <!-- Departure Date -->
+        <div class="form-group">
+          <label for="departure-date-display">Departure Date</label>
+          <div class="date-wrapper">
+            <input type="text" id="departure-date-display" placeholder="DD/MM/YYYY" readonly required />
+            <input type="date" id="departure-date" name="date" class="date-hidden" required />
+          </div>
+        </div>
+
+        <!-- Class & Quota -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="travel-class">Class</label>
+            <div class="select-wrapper">
+              <select id="travel-class" name="class" required>
+                <option value="ALL" selected>All Classes</option>
+                <option value="1A">First AC (1A)</option>
+                <option value="2A">Second AC (2A)</option>
+                <option value="3A">Third AC (3A)</option>
+                <option value="3E">Third AC Economy (3E)</option>
+                <option value="SL">Sleeper (SL)</option>
+                <option value="CC">AC Chair Car (CC)</option>
+                <option value="2S">Second Sitting (2S)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="quota">Quota</label>
+            <div class="select-wrapper">
+              <select id="quota" name="quota" required>
+                <option value="GN" selected>General (GN)</option>
+                <option value="TQ">Tatkal (TQ)</option>
+                <option value="PT">Premium Tatkal (PT)</option>
+                <option value="LD">Ladies (LD)</option>
+                <option value="HP">Physically Handicapped (HP)</option>
+                <option value="DF">Defence (DF)</option>
+                <option value="SS">Senior Citizen (SS)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Button -->
+        <a href="" id="search-trains-btn">
+          <button type="submit" class="search-btn" style="width: 100%;" onclick="window.location.href='error.html'">
+            🔍&nbsp; Search Trains
+          </button>
+        </a>
+
+      </form>
+    </div>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div class="footer__col">
+           <h4>RailConnect</h4>
+          <ul>
+            <li><a href="error.html">About Us</a></li>
+            <li><a href="error.html">Contact</a></li>
+            <li><a href="error.html">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="error.html">Train Schedule</a></li>
+            <li><a href="error.html">Fare Enquiry</a></li>
+            <li><a href="error.html">Station Info</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="error.html">Privacy Policy</a></li>
+            <li><a href="error.html">Terms of Use</a></li>
+            <li><a href="error.html">Refund Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="error.html">FAQs</a></li>
+            <li><a href="error.html">Customer Support</a></li>
+            <li><a href="error.html">Feedback</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>&copy; 2026 RailConnect — Indian Railways. All rights reserved.</span>
+        <span>
+          <a href="error.html">Privacy</a> &middot;
+          <a href="error.html">Terms</a> &middot;
+          <a href="error.html">Cookies</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== Scripts ===== -->
+  <script>
+    // Mobile menu toggle
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+      document.getElementById('nav-links').classList.toggle('open');
+    });
+
+    // Swap From ↔ To stations
+    document.getElementById('swap-btn').addEventListener('click', function () {
+      const from = document.getElementById('from-station');
+      const to = document.getElementById('to-station');
+      const temp = from.value;
+      from.value = to.value;
+      to.value = temp;
+    });
+
+    // Set default departure date to today, max to 60 days from today
+    (function () {
+      const today = new Date();
+      const isoDate = (d) => d.getFullYear() + '-' +
+        String(d.getMonth() + 1).padStart(2, '0') + '-' +
+        String(d.getDate()).padStart(2, '0');
+      const ddmmyyyy = (iso) => iso.split('-').reverse().join('/');
+
+      const maxDate = new Date(today);
+      maxDate.setDate(maxDate.getDate() + 60);
+
+      const dateInput = document.getElementById('departure-date');
+      const displayInput = document.getElementById('departure-date-display');
+
+      dateInput.value = isoDate(today);
+      dateInput.min = isoDate(today);
+      dateInput.max = isoDate(maxDate);
+      displayInput.value = ddmmyyyy(isoDate(today));
+
+      // Open native date picker when clicking the visible input
+      displayInput.addEventListener('click', function () {
+        dateInput.showPicker();
+      });
+
+      // Sync display when date is picked
+      dateInput.addEventListener('change', function () {
+        displayInput.value = ddmmyyyy(dateInput.value);
+      });
+    })();
+
+    // Real-time clock
+    function updateClock() {
+      const now = new Date();
+
+      // Time: 03:28:04 PM
+      let h = now.getHours();
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12 || 12;
+      const time = String(h).padStart(2, '0') + ':' +
+                   String(now.getMinutes()).padStart(2, '0') + ':' +
+                   String(now.getSeconds()).padStart(2, '0') + ' ' + ampm;
+
+      // Date: Mon Jun 09, 2026
+      const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                       'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const dateStr = days[now.getDay()] + ', ' +
+                      String(now.getDate()).padStart(2, '0') + ' ' +
+                      months[now.getMonth()] + ' ' +
+                      now.getFullYear();
+
+      document.getElementById('clock-time').textContent = time;
+      document.getElementById('clock-date').textContent = dateStr;
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Notifications toggle
+    function toggleNotifications() {
+      document.getElementById('notif-panel').classList.toggle('open');
+    }
+
+    document.addEventListener('click', function (e) {
+      const wrapper = document.querySelector('.nav-notif-wrapper');
+      if (wrapper && !wrapper.contains(e.target)) {
+        document.getElementById('notif-panel').classList.remove('open');
+      }
+    });
+  </script>
+
+</body>
+</html>

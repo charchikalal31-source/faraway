@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Indian Railways Services Portal — Book tickets, check PNR status, manage bookings, and access the Seat Exchange Service." />
+  <title>RailConnect — Railways Services</title>
+  <link rel="stylesheet" href="railconnect.css" />
+  <link rel="icon" href="logo.png" />
+  <script src="Notification.js" defer></script>
+  <script src="master.js" defer></script>
+</head>
+<body>
+
+  <!-- ===== Navbar ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__brand">
+      <img src="logo.png" alt="RailConnect Logo" />
+      <span>RailConnect</span>
+    </div>
+
+    <button class="navbar__toggle" id="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+    <div class="navbar__links" id="nav-links">
+      <a href="" class="active">Home</a>
+      <a href="#services">Services</a>
+      <a href="error.html">Support</a>
+      <a href="login.html">Logout</a>
+      <a href="#" class="nav-icon" title="Account">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </a>
+      <div class="nav-notif-wrapper">
+        <button class="nav-icon nav-notif-btn" id="notif-btn" title="Notifications" onclick="toggleNotifications(),tapnoti()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span class="notif-dot"></span>
+        </button>
+        <div class="notif-panel" id="notif-panel">
+          <div class="notif-panel__header">Notifications</div>
+          <div class="notif-panel__list">
+            <div class="notif-item notif-item--unread" id="sereq">
+              <div class="notif-item__icon">🔄</div>
+              <div class="notif-item__content">
+                <div class="notif-item__text">A person has requested to you for <br><strong>seat exchange</strong>.<br>
+                  <br>
+                  Train: <strong>KOAA ADI EXP (19414)</strong><br>
+                  Date: <strong>15 Jan 2026</strong><br>
+                  Your Seat: <strong id="ntcurseat"></strong><br>
+                  Exchange with: <strong id="ntchangeto"></strong><br>
+                 <br>
+                 <strong>Reason for exchange:</strong><br>
+                  <div class="notif-item__text" id="ntreason"></div>
+                   <div class="button">
+                    <button class="btn-acc" onclick="accepted()">ACCEPT</button>
+                    <button class="btn-dec" onclick="rejected()">DECLINE</button>
+                    </div>
+                
+                </div>
+                <div class="notif-item__time">Just now</div>
+              </div>
+            </div>
+             <div class="notif-item notif-item--unread" id="seacc">
+              <div class="notif-item__icon">🔄</div>
+              <div class="notif-item__content">
+                <div class="notif-item__text"><strong style="color:var(--green);font-size:1.2em;">You seat has been changed.</strong><br>
+                  <br>
+                  Train: <strong>KOAA ADI EXP (19414)</strong><br>
+                  Date: <strong>15 Jan 2026</strong><br>
+                  Your Current Seat: <strong id="ntcurseat2"></strong><br>
+                </div>
+                <div class="notif-item__time">Just now</div>
+              </div>
+            </div>
+             <div class="notif-item notif-item--unread" id="sedec">
+              <div class="notif-item__icon">🔄</div>
+              <div class="notif-item__content">
+                <div class="notif-item__text"><strong style="color:var(--red);font-size:1.2em;">You declined to change the seat.</strong><br>
+                  <br>
+                  Train: <strong>KOAA ADI EXP (19414)</strong><br>
+                  Date: <strong>15 Jan 2026</strong><br>
+                  Your Seat: <strong id="ntcurseat3"></strong><br>
+                </div>
+                <div class="notif-item__time">Just now</div>
+              </div>
+            </div>
+              <div class="notif-item notif-item--unread" id="seacc2">
+              <div class="notif-item__icon">🔄</div>
+              <div class="notif-item__content">
+                <div class="notif-item__text"><strong style="color:var(--green);font-size:1.2em;">You requst to change the seat was accepted.</strong><br>
+                  <br>
+                  Train: <strong>KOAA ADI EXP (19414)</strong><br>
+                  Date: <strong>15 Jan 2026</strong><br>
+                  Your Seat: <strong id="ntcurseat4"></strong><br>
+                </div>
+                <div class="notif-item__time">Just now</div>
+              </div>
+            </div>
+            <div class="notif-item notif-item--unread" id="sedec2">
+              <div class="notif-item__icon">🔄</div>
+              <div class="notif-item__content">
+                <div class="notif-item__text"><strong style="color:var(--red);font-size:1.2em;">You request to change the seat was declined.</strong><br>
+                  <br>
+                  Train: <strong>KOAA ADI EXP (19414)</strong><br>
+                  Date: <strong>15 Jan 2026</strong><br>
+                  Your Seat: <strong id="ntcurseat5"></strong><br>
+                </div>
+                <div class="notif-item__time">Just now</div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== Main ===== -->
+  <main class="main">
+
+    <!-- Welcome & User Info -->
+    <section class="welcome" id="welcome">
+      <h1 class="welcome__greeting" id="welcome_greeting"></h1>
+      <p class="welcome__sub">Here's a quick look at your profile information.</p>
+
+      <div class="welcome__info">
+        <div class="info-item">
+          <span class="info-item__label">Full Name</span>
+          <span class="info-item__value" id="name"> </span>
+        </div>
+        <div class="info-item">
+          <span class="info-item__label">Date of Birth</span>
+          <span class="info-item__value" id="dob"> </span>
+        </div>
+        <div class="info-item">
+          <span class="info-item__label">Gender</span>
+          <span class="info-item__value" id="gender"> </span>
+        </div>
+        <div class="info-item">
+          <span class="info-item__label">Email</span>
+          <span class="info-item__value" id="email"> </span>
+        </div>
+        <div class="info-item">
+          <span class="info-item__label">Mobile</span>
+          <span class="info-item__value">+91 XXXXX XXXXX</span>
+        </div>
+        <div class="info-item">
+          <span class="info-item__label">Aadhaar Verification</span>
+          <span class="info-item__value">
+            <span class="badge badge--verified">&#10003; Verified</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+      <h2 class="section-title">What would you like to use today?</h2>
+
+      <div class="services__grid">
+
+        <a href="booking.html" class="service-card" id="service-ticket-booking">
+          <div class="service-card__icon">🎫</div>
+          <span class="service-card__title">Book Ticket </span>
+        </a>
+
+        <a href="mybookings.html" class="service-card" id="service-my-bookings">
+          <div class="service-card__icon">📋</div>
+          <span class="service-card__title">My Bookings</span>
+        </a>
+
+        <a href="error.html" class="service-card" id="service-pnr-status">
+          <div class="service-card__icon">🔍</div>
+          <span class="service-card__title">PNR Status</span>
+        </a>
+
+        <a href="error.html" class="service-card" id="service-ticket-cancellation">
+          <div class="service-card__icon">✖️</div>
+          <span class="service-card__title">Cancel Ticket</span>
+        </a>
+
+        <a href="seat list.html" class="service-card service-card--highlight" id="service-seat-exchange">
+          <div class="service-card__icon">🔄</div>
+          <span class="service-card__title">Seat Exchange</span>
+          <span class="service-card__badge">★ New</span>
+        </a>
+
+        <a href="error.html" class="service-card" id="service-upcoming-journey">
+          <div class="service-card__icon">🚆</div>
+          <span class="service-card__title">Upcoming Journey</span>
+        </a>
+
+        <a href="error.html" class="service-card" id="service-refund-history">
+          <div class="service-card__icon">💰</div>
+          <span class="service-card__title">Refund History</span>
+        </a>
+
+        <a href="error.html" class="service-card" id="service-file-tdr">
+          <div class="service-card__icon">📄</div>
+          <span class="service-card__title">File TDR</span>
+        </a>
+
+      </div>
+    </section>
+
+    <div class="logo">
+        <img src="Redirect.png">
+    </div>
+
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div class="footer__col">
+          <h4>RailConnect</h4>
+          <ul>
+            <li><a href="error.html">About Us</a></li>
+            <li><a href="error.html">Contact</a></li>
+            <li><a href="error.html">Careers</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="error.html">Train Schedule</a></li>
+            <li><a href="error.html">Fare Enquiry</a></li>
+            <li><a href="error.html">Station Info</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="error.html">Privacy Policy</a></li>
+            <li><a href="error.html">Terms of Use</a></li>
+            <li><a href="error.html">Refund Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>Help</h4>
+          <ul>
+            <li><a href="error.html">FAQs</a></li>
+            <li><a href="error.html">Customer Support</a></li>
+            <li><a href="error.html">Feedback</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>&copy; 2026 RailConnect — Indian Railways. All rights reserved.</span>
+        <span>
+          <a href="error.html">Privacy</a> &middot;
+          <a href="error.html">Terms</a> &middot;
+          <a href="error.html">Cookies</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Minimal JS for mobile menu toggle -->
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+      document.getElementById('nav-links').classList.toggle('open');
+    });
+
+    function toggleNotifications() {
+      document.getElementById('notif-panel').classList.toggle('open');
+    }
+
+    // Close notification panel when clicking outside
+    document.addEventListener('click', function (e) {
+      const wrapper = document.querySelector('.nav-notif-wrapper');
+      if (wrapper && !wrapper.contains(e.target)) {
+        document.getElementById('notif-panel').classList.remove('open');
+      }
+    });
+  </script>
+
+</body>
+</html>
