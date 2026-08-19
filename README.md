@@ -67,6 +67,7 @@ You can run the application in one of two ways:
 * **Double-click:** Double-click on `gg.exe` in File Explorer. A command window will pop up indicating that the Flask server is running.
 * **Via Command Prompt:**
   ```cmd
+  cd /d "c:\Users\vedan\Downloads\railway-services (2)\railway-services\dist"
   gg.exe
   ```
 
