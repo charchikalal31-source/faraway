@@ -426,5 +426,19 @@ def get_user_notifications():
     return jsonify(response=-1)
 
 
+@app.route('/api/has-active-request', methods=['GET'])
+def has_active_request():
+    username = get_logged_in_username()
+    if not username:
+        return jsonify(has_active=False, error="Unauthorized"), 401
+
+    requests = get_exchange_requests()
+    for req in requests:
+        if req.get("Sender") == username and req.get("Status") == "Pending":
+            return jsonify(has_active=True, request_id=req.get("RequestID"))
+
+    return jsonify(has_active=False)
+
+
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000)
