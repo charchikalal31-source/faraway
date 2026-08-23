@@ -57,17 +57,14 @@ Open your web browser (Chrome, Edge, Firefox, etc.) and navigate to:
 This method does not require Python or any package installations. The executable is pre-packaged with all required libraries.
 
 ### 1. Locate the Executable File
-Open **File Explorer** and navigate to the project directory:
-`railway-services/dist/`
-
-Inside this folder, you will find the executable file named `gg.exe`.
+Open **File Explorer** and find the executable file named `gg.exe`.
 
 ### 2. Run the Executable
 You can run the application in one of two ways:
 * **Double-click:** Double-click on `gg.exe` in File Explorer. A command window will pop up indicating that the Flask server is running.
 * **Via Command Prompt:**
   ```cmd
-  cd /d "c:\Users\vedan\Downloads\railway-services (2)\railway-services\dist"
+  cd /d "c:\Users\vedan\Downloads\railway-services (2)\railway-services\"
   gg.exe
   ```
 
