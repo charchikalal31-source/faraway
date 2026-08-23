@@ -25,7 +25,14 @@ User = {
     'Bfofa': 'Darshil_Dubey',
     'TGGABRU': 'Prabhat_Chauhan',
     'BHAI': 'Charchika_Lal',
-    'Riya': 'Vanshika_Rai'
+    'Riya': 'Vanshika_Rai',
+    'BHAI': 'Bhai_Secure912',
+    'AmitKumar': 'Amit_Pass945',
+    'Sneha_P': 'Sneha_Secure982',
+    'Rajesh99': 'Rajesh_Nair011',
+    'VikramS': 'Vikram_Pass034',
+    'Pooja_R': 'Pooja_Tatkal078',
+    'DeepakK': 'Deepak_Kush102'
 }
 
 def read_csv_file(filename):
@@ -62,7 +69,10 @@ def get_bookings_by_username(username):
 
 
 def get_logged_in_username():
-    return session.get('username')
+    try:
+        return session.get('username')
+    except RuntimeError:
+        return None
 
 
 @app.after_request
@@ -102,6 +112,55 @@ def mybookings():
         user=get_user_by_username(username),
         bookings=get_bookings_by_username(username)
     )
+
+
+@app.route('/freeze')
+def freeze():
+    return render_template('freeze.html')
+
+
+@app.route('/seat')
+@app.route('/seat.html')
+@app.route('/seat-list')
+@app.route('/seat-list.html')
+def seat_page():
+    return render_template('seat list.html')
+
+
+@app.route('/final')
+@app.route('/final.html')
+def final_page():
+    username = get_logged_in_username()
+    if username:
+        requests = get_exchange_requests()
+        for req in reversed(requests):
+            if req.get("Sender") == username and req.get("Status") == "Pending":
+                return render_template('freeze.html')
+    return render_template('final.html')
+
+
+@app.route('/api/has-active-request')
+@app.route('/api/check-request')
+def api_has_active_request():
+    username = get_logged_in_username()
+    if not username:
+        return jsonify(logged_in=False, has_request=False), 401
+    
+    requests = get_exchange_requests()
+    for req in reversed(requests):
+        if req.get("Sender") == username and req.get("Status") == "Pending":
+            return jsonify(
+                logged_in=True,
+                has_request=True,
+                request_id=req.get("RequestID"),
+                receiver=req.get("Receiver"),
+                train_no=req.get("TrainNo"),
+                sender_seat=req.get("SenderSeat"),
+                receiver_seat=req.get("ReceiverSeat"),
+                reason=req.get("Reason")
+            )
+            
+    return jsonify(logged_in=True, has_request=False)
 
 
 @app.route('/api/users')
@@ -205,7 +264,7 @@ def write_bookings(bookings):
     path = os.path.join(data_path, 'Bookings.csv')
     try:
         with open(path, 'w', newline='', encoding='utf-8') as file:
-            writer = csv.DictWriter(file, fieldnames=['BookingID', 'Username', 'TrainNo', 'Class', 'Quota', 'SeatNo'])
+            writer = csv.DictWriter(file, fieldnames=['BookingID', 'Username', 'TrainNo', 'Class', 'Quota', 'SeatNo', 'From', 'To', 'Duration']) 
             writer.writeheader()
             writer.writerows(bookings)
         return True
@@ -242,17 +301,39 @@ def create_exchange_request():
     train_no = user_booking.get("TrainNo", "").strip()
     sender_seat_actual = user_booking.get("SeatNo", "").strip()
     
+    sender_from = user_booking.get("From", "").strip()
+    sender_to = user_booking.get("To", "").strip()
+    sender_duration = user_booking.get("Duration", "").strip()
+    
     # Find receiver booking on the same train and seat
     all_bookings = get_bookings()
     receiver_booking = None
+    
     for booking in all_bookings:
         if booking.get("TrainNo", "").strip() == train_no and booking.get("SeatNo", "").strip() == target_seat:
             receiver_booking = booking
             break
             
     if not receiver_booking:
-        return jsonify(success=False, error=f"No passenger found on Seat {target_seat} for train {train_no}"), 400
-        
+        return jsonify(
+        success=False,
+        no_passenger=True,
+        error="No passenger is currently booked on this seat."
+    ), 400
+    receiver_from = receiver_booking.get("From", "").strip()
+    receiver_to = receiver_booking.get("To", "").strip()
+    receiver_duration = receiver_booking.get("Duration", "").strip()
+
+    if (
+    sender_from != receiver_from
+    or sender_to != receiver_to
+    or sender_duration != receiver_duration
+    ):
+     return jsonify(
+        success=False,
+        error="You are not compatible for a seat exchange.",
+        compatibility_error=True
+    ), 400     
     receiver_username = receiver_booking.get("Username", "").strip()
     if receiver_username == username:
         return jsonify(success=False, error="Cannot exchange seat with yourself"), 400
@@ -289,155 +370,245 @@ def create_exchange_request():
 @app.route('/api/exchange-request/respond', methods=['POST'])
 def respond_exchange_request():
     username = get_logged_in_username()
+
     if not username:
         return jsonify(success=False, error="Unauthorized"), 401
-        
+
     data = request.get_json()
+
     if not data:
         return jsonify(success=False, error="Invalid payload"), 400
-        
+
     request_id = data.get("request_id")
-    action = data.get("action") # "accept" or "decline"
-    
+    action = data.get("action")  # "accept" or "decline"
+
     if not request_id or action not in ["accept", "decline"]:
         return jsonify(success=False, error="Invalid parameters"), 400
-        
+
     requests = get_exchange_requests()
+
+    # ---------------------------------------------------------
+    # Find the request the user is responding to
+    # ---------------------------------------------------------
+
     target_req = None
+
     for req_item in requests:
         if req_item.get("RequestID") == request_id:
             target_req = req_item
             break
-            
+
     if not target_req:
         return jsonify(success=False, error="Request not found"), 404
-        
+
+    # ---------------------------------------------------------
+    # Make sure the logged-in user is the receiver
+    # ---------------------------------------------------------
+
     if target_req.get("Receiver") != username:
-        return jsonify(success=False, error="Unauthorized to respond to this request"), 403
-        
+        return jsonify(
+            success=False,
+            error="Unauthorized to respond to this request"
+        ), 403
+
+    # ---------------------------------------------------------
+    # Make sure the request is still pending
+    # ---------------------------------------------------------
+
     if target_req.get("Status") != "Pending":
-        return jsonify(success=False, error="Request has already been processed"), 400
-        
+        return jsonify(
+            success=False,
+            error="Request has already been processed"
+        ), 400
+
+    # =========================================================
+    # ACCEPT REQUEST
+    # =========================================================
+
     if action == "accept":
-        target_req["Status"] = "Accepted"
-        
-        # Swap seats in Bookings.csv!
+
+        # -----------------------------------------------------
+        # Get seat-exchange information first
+        # -----------------------------------------------------
+
         train_no = target_req.get("TrainNo")
         sender = target_req.get("Sender")
         receiver = target_req.get("Receiver")
         sender_seat = target_req.get("SenderSeat")
         receiver_seat = target_req.get("ReceiverSeat")
-        
+
+        # -----------------------------------------------------
+        # Find the two bookings involved in this exchange
+        # -----------------------------------------------------
+
         bookings = get_bookings()
+
         sender_booking = None
         receiver_booking = None
+
         for b in bookings:
+
             if b.get("TrainNo") == train_no:
-                if b.get("Username") == sender and b.get("SeatNo") == sender_seat:
+
+                if (
+                    b.get("Username") == sender
+                    and b.get("SeatNo") == sender_seat
+                ):
                     sender_booking = b
-                elif b.get("Username") == receiver and b.get("SeatNo") == receiver_seat:
+
+                elif (
+                    b.get("Username") == receiver
+                    and b.get("SeatNo") == receiver_seat
+                ):
                     receiver_booking = b
-                    
-        if sender_booking and receiver_booking:
-            # Swap
-            sender_booking["SeatNo"] = receiver_seat
-            receiver_booking["SeatNo"] = sender_seat
-            write_bookings(bookings)
-        else:
-            return jsonify(success=False, error="Could not locate bookings to swap"), 500
-            
-    else: # decline
+
+        # -----------------------------------------------------
+        # Make sure both bookings exist BEFORE changing
+        # notification/request statuses
+        # -----------------------------------------------------
+
+        if not sender_booking or not receiver_booking:
+
+            return jsonify(
+                success=False,
+                error="Could not locate bookings to swap"
+            ), 500
+
+        # -----------------------------------------------------
+        # Swap the seats
+        # -----------------------------------------------------
+
+        sender_booking["SeatNo"] = receiver_seat
+        receiver_booking["SeatNo"] = sender_seat
+
+        if not write_bookings(bookings):
+
+            return jsonify(
+                success=False,
+                error="Failed to update bookings"
+            ), 500
+
+        # -----------------------------------------------------
+        # Mark the selected request as ACCEPTED
+        # -----------------------------------------------------
+
+        target_req["Status"] = "Accepted"
+
+        # -----------------------------------------------------
+        # IMPORTANT:
+        # Decline every OTHER pending request sent to the
+        # same receiver.
+        # -----------------------------------------------------
+
+        for req_item in requests:
+
+            if (
+                req_item.get("RequestID") != request_id
+                and req_item.get("Receiver") == username
+                and req_item.get("Status") == "Pending"
+            ):
+
+                req_item["Status"] = "Declined"
+
+    # =========================================================
+    # DECLINE REQUEST
+    # =========================================================
+
+    else:
+
         target_req["Status"] = "Declined"
-        
-    write_exchange_requests(requests)
+
+    # ---------------------------------------------------------
+    # Save all exchange-request changes
+    # ---------------------------------------------------------
+
+    if not write_exchange_requests(requests):
+
+        return jsonify(
+            success=False,
+            error="Failed to update exchange requests"
+        ), 500
+
     return jsonify(success=True)
 
 
 @app.route('/api/notifications', methods=['GET'])
 def get_user_notifications():
     username = get_logged_in_username()
-    if not username:
-        return jsonify(response=-1), 401
-        
-    requests = get_exchange_requests()
-    # Find active notification for user (most recent first)
-    for req in reversed(requests):
-        # 1. Incoming Pending Request
-        if req.get("Receiver") == username and req.get("Status") == "Pending":
-            return jsonify(
-                response=0,
-                request_id=req.get("RequestID"),
-                sender=req.get("Sender"),
-                receiver=req.get("Receiver"),
-                train_no=req.get("TrainNo"),
-                sender_seat=req.get("SenderSeat"),
-                receiver_seat=req.get("ReceiverSeat"),
-                reason=req.get("Reason")
-            )
-        # 2. Incoming Accepted Request
-        if req.get("Receiver") == username and req.get("Status") == "Accepted":
-            return jsonify(
-                response=1,
-                request_id=req.get("RequestID"),
-                sender=req.get("Sender"),
-                receiver=req.get("Receiver"),
-                train_no=req.get("TrainNo"),
-                sender_seat=req.get("SenderSeat"),
-                receiver_seat=req.get("ReceiverSeat"),
-                reason=req.get("Reason")
-            )
-        # 3. Incoming Declined Request
-        if req.get("Receiver") == username and req.get("Status") == "Declined":
-            return jsonify(
-                response=2,
-                request_id=req.get("RequestID"),
-                sender=req.get("Sender"),
-                receiver=req.get("Receiver"),
-                train_no=req.get("TrainNo"),
-                sender_seat=req.get("SenderSeat"),
-                receiver_seat=req.get("ReceiverSeat"),
-                reason=req.get("Reason")
-            )
-        # 4. Outgoing Accepted Request
-        if req.get("Sender") == username and req.get("Status") == "Accepted":
-            return jsonify(
-                response=3,
-                request_id=req.get("RequestID"),
-                sender=req.get("Sender"),
-                receiver=req.get("Receiver"),
-                train_no=req.get("TrainNo"),
-                sender_seat=req.get("SenderSeat"),
-                receiver_seat=req.get("ReceiverSeat"),
-                reason=req.get("Reason")
-            )
-        # 5. Outgoing Declined Request
-        if req.get("Sender") == username and req.get("Status") == "Declined":
-            return jsonify(
-                response=4,
-                request_id=req.get("RequestID"),
-                sender=req.get("Sender"),
-                receiver=req.get("Receiver"),
-                train_no=req.get("TrainNo"),
-                sender_seat=req.get("SenderSeat"),
-                receiver_seat=req.get("ReceiverSeat"),
-                reason=req.get("Reason")
-            )
-            
-    return jsonify(response=-1)
 
-
-@app.route('/api/has-active-request', methods=['GET'])
-def has_active_request():
-    username = get_logged_in_username()
     if not username:
-        return jsonify(has_active=False, error="Unauthorized"), 401
+        return jsonify(notifications=[]), 401
 
     requests = get_exchange_requests()
+
+    notifications = []
+
     for req in requests:
-        if req.get("Sender") == username and req.get("Status") == "Pending":
-            return jsonify(has_active=True, request_id=req.get("RequestID"))
 
-    return jsonify(has_active=False)
+        request_id = req.get("RequestID")
+        sender = req.get("Sender")
+        receiver = req.get("Receiver")
+        status = req.get("Status")
+
+        notification = {
+            "request_id": request_id,
+            "sender": sender,
+            "receiver": receiver,
+            "train_no": req.get("TrainNo"),
+            "sender_seat": req.get("SenderSeat"),
+            "receiver_seat": req.get("ReceiverSeat"),
+            "reason": req.get("Reason"),
+            "date": "15 Jan 2026"
+        }
+
+
+        # =====================================================
+        # Incoming notification
+        # Receiver is the logged-in user
+        # =====================================================
+
+        if receiver == username:
+
+            # Pending request
+            if status == "Pending":
+                notification["type"] = "incoming_pending"
+                notifications.append(notification)
+
+            # Accepted request
+            elif status == "Accepted":
+                notification["type"] = "incoming_accepted"
+                notifications.append(notification)
+
+            # Declined request
+            elif status == "Declined":
+                notification["type"] = "incoming_declined"
+                notifications.append(notification)
+
+
+        # =====================================================
+        # Outgoing notification
+        # Sender is the logged-in user
+        # =====================================================
+
+        elif sender == username:
+
+            # Accepted request
+            if status == "Accepted":
+                notification["type"] = "outgoing_accepted"
+                notifications.append(notification)
+
+            # Declined request
+            elif status == "Declined":
+                notification["type"] = "outgoing_declined"
+                notifications.append(notification)
+
+
+    # Newest notifications first
+    notifications.reverse()
+
+    return jsonify(
+        notifications=notifications
+    )
 
 
 if __name__ == '__main__':
